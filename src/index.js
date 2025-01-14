@@ -223,7 +223,7 @@ function createStarCreateEmbed(payload) {
 
 function createStarDeleteEmbed(payload) {
   return {
-    title: "🚫 スターが消去されました"
+    title: "🚫 スターが消去されました",
     color: 0x808080,
     fields: [{ name: "消去日時", value: new Date().toLocaleString() }],
     footer: { text: `Star ID: ${payload.id}` },
