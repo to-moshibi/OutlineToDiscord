@@ -100,40 +100,40 @@ app.post("/outline-webhook", async (req, res) => {
 
 function createDeleteEmbed(payload) {
   return {
-    title: "📄 Document Deleted",
+    title: "📄 ドキュメントが消去されました",
     color: 0xff0000,
     fields: [
-      { name: "Title", value: payload.model.title },
-      { name: "Deleted By", value: payload.model.updatedBy.name },
+      { name: "タイトル", value: payload.model.title },
+      { name: "消去者", value: payload.model.updatedBy.name },
       {
-        name: "Deleted At",
+        name: "消去日時",
         value: new Date(payload.model.deletedAt).toLocaleString(),
       },
     ],
-    footer: { text: `Document ID: ${payload.model.id}` },
+    footer: { text: `ドキュメントID: ${payload.model.id}` },
   };
 }
 
 function createPermanentDeleteEmbed(payload) {
   return {
-    title: "🗑️ Document Permanently Deleted",
+    title: "🗑️ ドキュメントが永久に消去されました",
     color: 0xff0000,
-    fields: [{ name: "Event ID", value: payload.id }],
+    fields: [{ name: "イベントID", value: payload.id }],
     footer: {
-      text: "This document has been permanently removed and cannot be recovered.",
+      text: "このドキュメントは永久に消去され、復元することはできません",
     },
   };
 }
 
 function createRevisionEmbed(payload) {
   return {
-    title: "📝 Document Revised",
+    title: "📝 ドキュメントが修正されました",
     color: 0xffff00,
     fields: [
-      { name: "Title", value: payload.model.title },
-      { name: "Revised By", value: payload.model.createdBy.name },
+      { name: "タイトル", value: payload.model.title },
+      { name: "修正者", value: payload.model.createdBy.name },
       {
-        name: "Revised At",
+        name: "修正日時",
         value: new Date(payload.model.createdAt).toLocaleString(),
       },
     ],
@@ -143,31 +143,31 @@ function createRevisionEmbed(payload) {
 
 function createUpdateEmbed(payload) {
   return {
-    title: "🔄 Document Updated",
+    title: "🔄 ドキュメントがアップデートされました",
     color: 0x00ff00,
     fields: [
-      { name: "Title", value: payload.model.title },
-      { name: "Updated By", value: payload.model.updatedBy.name },
+      { name: "タイトル", value: payload.model.title },
+      { name: "アップデート者", value: payload.model.updatedBy.name },
       {
-        name: "Updated At",
+        name: "アップデート日時",
         value: new Date(payload.model.updatedAt).toLocaleString(),
       },
     ],
-    footer: { text: `Document ID: ${payload.model.id}` },
+    footer: { text: `ドキュメントID: ${payload.model.id}` },
   };
 }
 
 function createWebhookSubscriptionEmbed(payload) {
   return {
-    title: "🔗 Webhook Subscription Updated",
+    title: "🔗 Webhook の登録が更新されました",
     color: 0x00ffff,
     fields: [
-      { name: "Name", value: payload.model.name },
+      { name: "名前", value: payload.model.name },
       { name: "URL", value: payload.model.url },
-      { name: "Events", value: payload.model.events.join(", ") },
-      { name: "Enabled", value: payload.model.enabled ? "Yes" : "No" },
+      { name: "イベント", value: payload.model.events.join(", ") },
+      { name: "有効", value: payload.model.enabled ? "はい" : "いいえ" },
       {
-        name: "Updated At",
+        name: "更新日時",
         value: new Date(payload.model.updatedAt).toLocaleString(),
       },
     ],
@@ -177,43 +177,43 @@ function createWebhookSubscriptionEmbed(payload) {
 
 function createTeamUpdateEmbed(payload) {
   return {
-    title: "👥 Team Updated",
+    title: "👥 チームが更新されました",
     color: 0xffa500,
     fields: [
-      { name: "Name", value: payload.model.name },
+      { name: "名前", value: payload.model.name },
       { name: "URL", value: payload.model.url },
     ],
-    footer: { text: `Team ID: ${payload.model.id}` },
+    footer: { text: `チームID: ${payload.model.id}` },
   };
 }
 
 function createDocumentCreateEmbed(payload) {
   return {
-    title: "📄 New Document Created",
+    title: "📄 新しいドキュメントが作成されました",
     color: 0x00ff00,
     fields: [
-      { name: "Title", value: payload.model.title || "Untitled" },
-      { name: "Created By", value: payload.model.createdBy.name },
+      { name: "タイトル", value: payload.model.title || "未設定" },
+      { name: "作成者", value: payload.model.createdBy.name },
       {
-        name: "Created At",
+        name: "作成日時",
         value: new Date(payload.model.createdAt).toLocaleString(),
       },
     ],
-    footer: { text: `Document ID: ${payload.model.id}` },
+    footer: { text: `ドキュメントID: ${payload.model.id}` },
   };
 }
 
 function createStarCreateEmbed(payload) {
   return {
-    title: "⭐ Item Starred",
+    title: "⭐ スターが付けられました",
     color: 0xffd700,
     fields: [
       {
-        name: "Type",
-        value: payload.model.documentId ? "Document" : "Collection",
+        name: "タイプ",
+        value: payload.model.documentId ? "ドキュメント" : "コレクション",
       },
       {
-        name: "Starred At",
+        name: "付けられた日時",
         value: new Date(payload.model.createdAt).toLocaleString(),
       },
     ],
@@ -223,118 +223,118 @@ function createStarCreateEmbed(payload) {
 
 function createStarDeleteEmbed(payload) {
   return {
-    title: "🚫 Star Removed",
+    title: "🚫 スターが消去されました"
     color: 0x808080,
-    fields: [{ name: "Removed At", value: new Date().toLocaleString() }],
+    fields: [{ name: "消去日時", value: new Date().toLocaleString() }],
     footer: { text: `Star ID: ${payload.id}` },
   };
 }
 
 function createDocumentTitleChangeEmbed(payload) {
   return {
-    title: "✏️ Document Title Changed",
+    title: "✏️ ドキュメントのタイトルが変更されました",
     color: 0x1e90ff,
     fields: [
-      { name: "New Title", value: payload.model.title },
-      { name: "Changed By", value: payload.model.updatedBy.name },
+      { name: "新しいタイトル", value: payload.model.title },
+      { name: "更新者", value: payload.model.updatedBy.name },
       {
         name: "Changed At",
         value: new Date(payload.model.updatedAt).toLocaleString(),
       },
     ],
-    footer: { text: `Document ID: ${payload.model.id}` },
+    footer: { text: `ドキュメントID: ${payload.model.id}` },
   };
 }
 
 function createDocumentPublishEmbed(payload) {
   return {
-    title: "🌐 Document Published",
+    title: "🌐 ドキュメントが公開されました",
     color: 0x32cd32,
     fields: [
-      { name: "Title", value: payload.model.title },
-      { name: "Published By", value: payload.model.updatedBy.name },
+      { name: "タイトル", value: payload.model.title },
+      { name: "公開者", value: payload.model.updatedBy.name },
       {
-        name: "Published At",
+        name: "公開日時",
         value: new Date(payload.model.publishedAt).toLocaleString(),
       },
     ],
-    footer: { text: `Document ID: ${payload.model.id}` },
+    footer: { text: `ドキュメントID: ${payload.model.id}` },
   };
 }
 
 function createPinCreateEmbed(payload) {
   return {
-    title: "📌 Item Pinned",
+    title: "📌 ピンされました",
     color: 0xdc143c,
     fields: [
       {
-        name: "Type",
-        value: payload.model.documentId ? "Document" : "Collection",
+        name: "タイプ",
+        value: payload.model.documentId ? "ドキュメント" : "コレクション",
       },
       {
-        name: "Pinned At",
+        name: "ピンされた日時",
         value: new Date(payload.model.createdAt).toLocaleString(),
       },
     ],
-    footer: { text: `Pin ID: ${payload.model.id}` },
+    footer: { text: `ピンID: ${payload.model.id}` },
   };
 }
 
 function createDocumentArchiveEmbed(payload) {
   return {
-    title: "🗄️ Document Archived",
+    title: "🗄️ ドキュメントがアーカイブされました",
     color: 0x808080,
     fields: [
-      { name: "Title", value: payload.model.title },
-      { name: "Archived By", value: payload.model.updatedBy.name },
+      { name: "タイトル", value: payload.model.title },
+      { name: "アーカイブした人", value: payload.model.updatedBy.name },
       {
-        name: "Archived At",
+        name: "アーカイブ日時",
         value: new Date(payload.model.archivedAt).toLocaleString(),
       },
     ],
-    footer: { text: `Document ID: ${payload.model.id}` },
+    footer: { text: `ドキュメントID: ${payload.model.id}` },
   };
 }
 
 function createCommentEmbed(payload, documentDetails) {
   return {
-    title: "💬 New Comment",
+    title: "💬 新しいコメント",
     color: 0x1e90ff,
     fields: [
-      { name: "Comment", value: payload.model.data.content[0].content[0].text },
-      { name: "Commented By", value: payload.model.createdBy.name },
-      { name: "Document Title", value: documentDetails.title },
-      { name: "Document Link", value: `${process.env.OUTLINE_URL}${documentDetails.url}` // Link to the document
+      { name: "コメント", value: payload.model.data.content[0].content[0].text },
+      { name: "コメントした人", value: payload.model.createdBy.name },
+      { name: "ドキュメントのタイトル", value: documentDetails.title },
+      { name: "ドキュメントのリンク", value: `${process.env.OUTLINE_URL}${documentDetails.url}` // Link to the document
       },
     ],
-    footer: { name: "Created At", value: new Date(payload.model.createdAt).toLocaleString() },
+    footer: { name: "作成日時", value: new Date(payload.model.createdAt).toLocaleString() },
   };
 }
 
 function createCommentDeleteEmbed(payload, documentDetails) {
   return {
-    title: "🗑️ Comment Deleted",
+    title: "🗑️ コメントが消去されました",
     color: 0xff0000,
     fields: [
-      { name: "Deleted By", value: payload.model.createdBy.name },
-      { name: "Document Title", value: documentDetails.title },
-      { name: "Document Link", value: `${process.env.OUTLINE_URL}${documentDetails.url}` },
+      { name: "消去した人", value: payload.model.createdBy.name },
+      { name: "ドキュメントのタイトル", value: documentDetails.title },
+      { name: "ドキュメントのリンク", value: `${process.env.OUTLINE_URL}${documentDetails.url}` },
     ],
-    footer: { text: `Comment ID: ${payload.model.id} - Deleted At: ${new Date().toLocaleString()}` },
+    footer: { text: `コメントID: ${payload.model.id} - 消去日時: ${new Date().toLocaleString()}` },
   };
 }
 
 function createCommentUpdateEmbed(payload, documentDetails) {
   return {
-    title: "✏️ Comment Updated",
+    title: "✏️ コメントが更新されました",
     color: 0x1e90ff,
     fields: [
-      { name: "Updated Comment", value: payload.model.data.content[0].content[0].text },
-      { name: "Updated By", value: payload.model.createdBy.name },
-      { name: "Document Title", value: documentDetails.title },
-      { name: "Document Link", value: `${process.env.OUTLINE_URL}${documentDetails.url}` },
+      { name: "更新されたコメント", value: payload.model.data.content[0].content[0].text },
+      { name: "更新した人", value: payload.model.createdBy.name },
+      { name: "ドキュメントのタイトル", value: documentDetails.title },
+      { name: "ドキュメントのリンク", value: `${process.env.OUTLINE_URL}${documentDetails.url}` },
     ],
-    footer: { text: `Comment ID: ${payload.model.id} - Updated At: ${new Date(payload.model.updatedAt).toLocaleString()}` },
+    footer: { text: `コメントID: ${payload.model.id} - 更新日時: ${new Date(payload.model.updatedAt).toLocaleString()}` },
   };
 }
 
