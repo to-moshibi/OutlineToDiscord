@@ -301,7 +301,7 @@ function createCommentEmbed(payload, documentDetails) {
     title: "💬 新しいコメント",
     color: 0x1e90ff,
     fields: [
-      { name: "コメント", value: payload.model.data.content[0].content[0].text },
+      { name: "コメント", value: payload.model.data.content[0].content[0].text == null? "新しいコメント" : payload.model.data.content[0].content[0].text },
       { name: "コメントした人", value: payload.model.createdBy.name },
       { name: "ドキュメントのタイトル", value: documentDetails.title },
       { name: "ドキュメントのリンク", value: `${process.env.OUTLINE_URL}${documentDetails.url}` // Link to the document
